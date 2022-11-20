@@ -1,0 +1,57 @@
+﻿<Window x:Class="ServerComandas.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServerComandas" 
+        xmlns:viewmodels="clr-namespace:ServerComandas.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <viewmodels:ServerViewModel></viewmodels:ServerViewModel>
+    </Window.DataContext>
+    <DockPanel>
+        <Button Command="{Binding inicio}" DockPanel.Dock="Bottom" >Iniciar</Button>
+        <ItemsControl ItemsSource="{Binding ListaComandas}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel >
+                        <Label Content="{Binding Id}" ContentStringFormat="Id: {0}"></Label>
+                        <Label Content="{Binding total}"  ContentStringFormat="Total: {0}"></Label>
+                        <Label Content="{Binding Fecha}"  ContentStringFormat="Hora de pedido: {0}"></Label>
+                        <ListBox ItemsSource="{Binding Pedidos}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition  Width="0.2*"></ColumnDefinition>
+                                            <ColumnDefinition Width=".4*"></ColumnDefinition>
+                                            <ColumnDefinition Width=".2*"></ColumnDefinition>
+                                            <ColumnDefinition Width=".2*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label  DockPanel.Dock="Right" Content="{Binding Value}"></Label>
+                                        <Label Content="{Binding Key}"></Label>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4">
+
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </DockPanel>
+    
+ 
+</Window>
