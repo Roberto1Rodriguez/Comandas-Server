@@ -52,19 +52,20 @@ namespace Comandas_Server.Services
                         ListaComandas = new ObservableCollection<Comanda>();
                         Com = new Comanda();
 
-                        Com.Pedidos = new Dictionary<string, int>();
+                        Com.Pedidos = new Dictionary<string, Producto>();
                         Prod = new Producto();
                         Prod.Descripcion = "Rica hamburgesa con doble carne";
                         Prod.Nombre = "Hambirguesa";
                         Prod.Tipo = Tipo.platillo;
                         Prod.Precio = 50;
-                        Com.Pedidos.Add(Prod.Nombre, 2);
+                        Prod.Cantidad = 2;
+                        Com.Pedidos.Add(Prod.Nombre, Prod);
                         Prod = new Producto();
                         Prod.Descripcion = "Rico taco de pastor";
                         Prod.Nombre = "Tacos al pastor";
                         Prod.Tipo = Tipo.platillo;
-                        Prod.Precio = 40;
-                        Com.Pedidos.Add(Prod.Nombre, 4);
+                        Prod.Precio = 40; Prod.Cantidad = 5;
+                        Com.Pedidos.Add(Prod.Nombre, Prod);
                         Com.Id = 1232;
                         Com.Fecha = DateTime.Now.ToShortTimeString();
                         Com.total = 100;

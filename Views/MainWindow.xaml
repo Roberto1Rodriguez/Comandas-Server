@@ -4,52 +4,84 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServerComandas" 
-        xmlns:viewmodels="clr-namespace:ServerComandas.ViewModels"
+        xmlns:viewmodels1="clr-namespace:Comandas_Server.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
     <Window.DataContext>
-        <viewmodels:ServerViewModel></viewmodels:ServerViewModel>
+        <viewmodels1:ServerViewModel></viewmodels1:ServerViewModel>
     </Window.DataContext>
     <DockPanel>
         <Button Command="{Binding inicio}" DockPanel.Dock="Bottom" >Iniciar</Button>
         <ItemsControl ItemsSource="{Binding ListaComandas}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel >
+                    <StackPanel Height="350"  Background="#C2F2DF"   Margin="5" >
                         <Label Content="{Binding Id}" ContentStringFormat="Id: {0}"></Label>
                         <Label Content="{Binding total}"  ContentStringFormat="Total: {0}"></Label>
                         <Label Content="{Binding Fecha}"  ContentStringFormat="Hora de pedido: {0}"></Label>
-                        <ListBox ItemsSource="{Binding Pedidos}">
-                            <ListBox.ItemTemplate>
+                        <Grid Background="#49E696" Margin="0,0,0,0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  Width="0.5*"></ColumnDefinition>
+                                <ColumnDefinition  Width="0.25*"></ColumnDefinition>
+                                <ColumnDefinition  Width="0.25*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"  Grid.Column="0">Pedido</Label>
+                            <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"     Grid.Column="1">Precio</Label>
+                            <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"   Grid.Column="2">Cantidad</Label>
+                        </Grid>
+                     
+                        <ItemsControl  Background="White"  BorderThickness="0"   Margin="0" Padding="0" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding Pedidos}">
+                          
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid  Margin="0"    >
+                                      
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition  Width="0.2*"></ColumnDefinition>
-                                            <ColumnDefinition Width=".4*"></ColumnDefinition>
-                                            <ColumnDefinition Width=".2*"></ColumnDefinition>
-                                            <ColumnDefinition Width=".2*"></ColumnDefinition>
+                                            <ColumnDefinition  Width="0.5*">
+                                                
+                                            </ColumnDefinition>
+                                            <ColumnDefinition  Width="0.25*">
+                                            
+                                            </ColumnDefinition>
+                                            <ColumnDefinition  Width="0.25*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <Label  DockPanel.Dock="Right" Content="{Binding Value}"></Label>
-                                        <Label Content="{Binding Key}"></Label>
+
+
+                                        <Label HorizontalContentAlignment="Left" BorderBrush="Black" BorderThickness="0,0,0,1"  Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Precio}"></Label>
+
+
+                                        <Label HorizontalContentAlignment="Left" BorderBrush="Black" BorderThickness="0,0,0,1" Grid.Column="0"  Padding="0" Margin="0"    Content="{Binding Key}"></Label>
+                                        <Label HorizontalContentAlignment="Left" BorderBrush="Black" BorderThickness="0,0,0,1" Grid.Column="2"   Padding="0" Margin="0"       Content="{Binding Value.Cantidad}"></Label>
 
                                     </Grid>
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
+                            </ItemsControl.ItemTemplate>
 
-                        </ListBox>
+                        </ItemsControl>
+
+                        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <Button>Cancelar</Button>
+                            <Button>Entregado</Button>
+                        </WrapPanel>
                     </StackPanel>
 
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4">
-
-                    </UniformGrid>
-                </ItemsPanelTemplate>
-
-            </ItemsControl.ItemsPanel>
+                    <UniformGrid Columns="3" />
+                </ItemsPanelTemplate>     
+                </ItemsControl.ItemsPanel>
+            <ItemsControl.Template>
+                  <ControlTemplate >
+                <ScrollViewer CanContentScroll="True">
+                        <ItemsPresenter>
+                         
+                        </ItemsPresenter>
+                </ScrollViewer>
+            </ControlTemplate>
+            </ItemsControl.Template>
         </ItemsControl>
     </DockPanel>
     

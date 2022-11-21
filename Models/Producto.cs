@@ -14,5 +14,7 @@ namespace Comandas_Server.Models
         public string Descripcion { get; set; } = "";
         public Tipo Tipo { get; set; }
 
+        public int Cantidad { get; set; }
+
     }
 }

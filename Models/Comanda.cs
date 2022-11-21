@@ -10,7 +10,7 @@ namespace Comandas_Server.Models
     {
         public int Id { get; set; }
 
-        public Dictionary<string, int> Pedidos { get; set; }
+        public Dictionary<string, Producto> Pedidos { get; set; }
 
         public decimal total { get; set; }
 
