@@ -9,14 +9,14 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Window.DataContext>
-        <viewmodels1:ServerViewModel></viewmodels1:ServerViewModel>
+        <viewmodels1:ServerViewModel x:Name="lista"></viewmodels1:ServerViewModel>
     </Window.DataContext>
     <DockPanel>
         <Button Command="{Binding inicio}" DockPanel.Dock="Bottom" >Iniciar</Button>
-        <ItemsControl ItemsSource="{Binding ListaComandas}">
+        <ItemsControl  ItemsSource="{Binding ListaComandas}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Height="350"  Background="#C2F2DF"   Margin="5" >
+                    <StackPanel Height="400"  Background="#C2F2DF"   Margin="5" >
                         <Label Content="{Binding Id}" ContentStringFormat="Id: {0}"></Label>
                         <Label Content="{Binding total}"  ContentStringFormat="Total: {0}"></Label>
                         <Label Content="{Binding Fecha}"  ContentStringFormat="Hora de pedido: {0}"></Label>
@@ -30,10 +30,10 @@
                             <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"     Grid.Column="1">Precio</Label>
                             <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"   Grid.Column="2">Cantidad</Label>
                         </Grid>
-                     
-                        <ItemsControl  Background="White"  BorderThickness="0"   Margin="0" Padding="0" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding Pedidos}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl  Background="White"  BorderThickness="0"   Margin="0" Padding="0" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding Pedidos}">
                           
-                            <ItemsControl.ItemTemplate>
+                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid  Margin="0"    >
                                       
@@ -59,9 +59,11 @@
                             </ItemsControl.ItemTemplate>
 
                         </ItemsControl>
-
+                            </ScrollViewer>
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <Button>Cancelar</Button>
+                            <Button  Command="{Binding Source={x:Reference lista}, Path=Cancelar}" CommandParameter="{Binding .}">
+                             Cancelar
+                            </Button>
                             <Button>Entregado</Button>
                         </WrapPanel>
                     </StackPanel>
@@ -70,7 +72,7 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" />
+                    <UniformGrid Columns="3"  />
                 </ItemsPanelTemplate>     
                 </ItemsControl.ItemsPanel>
             <ItemsControl.Template>
