@@ -26,7 +26,7 @@ namespace Comandas_Server.Services
         HttpListener listener = new();
         public void Iniciar()
         {
-            listener.Prefixes.Add("http://*:11010/Comandas/");
+            listener.Prefixes.Add("http://*:45455/Comandas/");
             listener.Start();
             Thread hilo = new Thread(new ThreadStart(Escuchar));
             hilo.IsBackground = true;
@@ -76,21 +76,26 @@ namespace Comandas_Server.Services
 
                         Com = JsonConvert.DeserializeObject<Comanda>(json);
 
-                    }
 
+
+                        ComandaRecibida?.Invoke(Com);
+                        context.Response.StatusCode = 200;//estado de proceso OK
+                                                          //context.Response.Redirect("/album/");//redirecciona a la pagina principal
+
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 404;
+                    }
+                    context.Response.Close();
                     //Tomar solo lo que este despues del MIME typef
 
 
 
-                    ComandaRecibida?.Invoke(Com);
-                    context.Response.StatusCode = 200;//estado de proceso OK
+                ;//estado de proceso OK
                                                       //context.Response.Redirect("/album/");//redirecciona a la pagina principal
                 }
-                else
-                {
-                    context.Response.StatusCode = 404;
-                }
-                context.Response.Close();
+
             }
         }
     }
