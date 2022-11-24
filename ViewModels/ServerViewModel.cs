@@ -43,7 +43,7 @@ namespace Comandas_Server.ViewModels
             Com.Pedidos = new Dictionary<string, Producto>();
             Prod = new Producto();
             Prod.Descripcion = "Rica hamburgesa con doble carne";
-            Prod.Nombre = "Hambirguesa";
+            Prod.Nombre = "Hambirguesasdaddssdsdsdsdsdsd";
             Prod.Tipo = Tipo.platillo;
             Prod.Precio = 50;
             Prod.Cantidad = 5;
