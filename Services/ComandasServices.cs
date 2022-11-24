@@ -49,7 +49,7 @@ namespace Comandas_Server.Services
                     }
                     else if (context.Request.Url.LocalPath == "/Comandas/Nueva")
                     {
-                        ListaComandas = new ObservableCollection<Comanda>();
+                        
                         Com = new Comanda();
 
                         Com.Pedidos = new Dictionary<string, Producto>();
