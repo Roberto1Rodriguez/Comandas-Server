@@ -40,14 +40,7 @@ namespace Comandas_Server.Services
                 var context = listener.GetContext();
                 if (context.Request.Url != null)
                 {
-                    if (context.Request.Url.LocalPath == "/Comandas")
-                    {
-
-
-                        context.Response.StatusCode = 200; //ok
-
-                    }
-                    else if (context.Request.Url.LocalPath == "/Comandas/Nueva")
+                   if (context.Request.Url.LocalPath == "/Comandas/Nueva")
                     {
                         
                         Com = new Comanda();
@@ -62,8 +55,7 @@ namespace Comandas_Server.Services
 
 
                         ComandaRecibida?.Invoke(Com);
-                        context.Response.StatusCode = 200;//estado de proceso OK
-                                                          //context.Response.Redirect("/album/");//redirecciona a la pagina principal
+                        context.Response.StatusCode = 200;
 
                     }
                     else
@@ -71,12 +63,11 @@ namespace Comandas_Server.Services
                         context.Response.StatusCode = 404;
                     }
                     context.Response.Close();
-                    //Tomar solo lo que este despues del MIME typef
+               
 
 
 
-                ;//estado de proceso OK
-                                                      //context.Response.Redirect("/album/");//redirecciona a la pagina principal
+                
                 }
 
             }
