@@ -6,104 +6,142 @@
         xmlns:local="clr-namespace:ServerComandas" 
         xmlns:viewmodels1="clr-namespace:Comandas_Server.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="1000">
 
     <Window.DataContext>
         <viewmodels1:ServerViewModel x:Name="lista"></viewmodels1:ServerViewModel>
     </Window.DataContext>
-    <DockPanel Background="#FFEFD8" >
-        <TextBlock Background="#2063EB" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" DockPanel.Dock="Top">DonMai Sushi</TextBlock>
-        <Button Command="{Binding inicio}" DockPanel.Dock="Bottom" >Iniciar</Button>
-        <ItemsControl VerticalAlignment="Top"  ItemsSource="{Binding ListaComandas}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border  Height="380" Width="240"   BorderThickness="1" BorderBrush="#9E642A" Padding="0" Margin="5"  CornerRadius="15">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Assets/sushi.png"></ImageBrush>
-                            
-                        </Border.Background>
-                        <Border.Effect>
-                            <DropShadowEffect Opacity="0.4"  Direction="-90"  ShadowDepth="6"></DropShadowEffect>
-                        </Border.Effect>
-                    <Grid   >
-                          
-                    <StackPanel  Margin="5"    >
-                        <Label Content="{Binding Id}" ContentStringFormat="Id: {0}"></Label>
-                        <Label Content="{Binding total}"  ContentStringFormat="Total: {0}"></Label>
-                        <Label Content="{Binding Fecha}"  ContentStringFormat="Hora de pedido: {0}"></Label>
-                        <Grid Background="#49E696" Margin="0,0,0,0" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="0.5*"></ColumnDefinition>
-                                <ColumnDefinition  Width="0.25*"></ColumnDefinition>
-                                <ColumnDefinition  Width="0.25*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"  Grid.Column="0">Pedido</Label>
-                            <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"     Grid.Column="1">Precio</Label>
-                            <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"   Grid.Column="2">Cantidad</Label>
-                        </Grid>
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ItemsControl  BorderThickness="0"   Margin="0" Padding="0" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding Pedidos}">
-                          
-                             <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid  Margin="0"    >
-                                      
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Background="#FFB899" Grid.Column="1"  DockPanel.Dock="Right" >
+            <TextBlock Background="#FF6324" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" DockPanel.Dock="Top">Entregados</TextBlock>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"   >
+                <ItemsControl ItemsSource="{Binding ListaEntregados}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5" Background="#253333" CornerRadius="5" Margin="5">
+                            <WrapPanel >
+                                <TextBlock Foreground="White">Id:</TextBlock>
+                                    <TextBlock Margin="0,0,2,0" Foreground="White" Text="{Binding Id}"></TextBlock>
+                                <TextBlock   Foreground="White">Hora:</TextBlock>
+                                    <TextBlock Margin="0,0,2,0" Foreground="White" Text="{Binding Fecha}"></TextBlock>
+                                    <TextBlock   Foreground="White">Total:</TextBlock>
+                                <TextBlock  Foreground="White" Text="{Binding total}"></TextBlock>
+                            </WrapPanel>
+                            </Border>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Background="#FFEFD8" >
+           
+            <TextBlock Background="#2063EB" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" DockPanel.Dock="Top">DonMai Sushi Comandas</TextBlock>
+            <Button Width="100" Content="Iniciar" Padding="5" Command="{Binding inicio}" Margin="2" HorizontalAlignment="Center" Background="#253333" Foreground="White" DockPanel.Dock="Bottom" >
+            
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+       
+            </Button>
+            <ItemsControl VerticalAlignment="Top"  ItemsSource="{Binding ListaComandas}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border  Height="380" Width="240"   BorderThickness="1" BorderBrush="#9E642A" Padding="0" Margin="5"  CornerRadius="15">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/Assets/sushi.png"></ImageBrush>
+
+                            </Border.Background>
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.4"  Direction="-90"  ShadowDepth="6"></DropShadowEffect>
+                            </Border.Effect>
+                            <Grid   >
+
+                                <StackPanel  Margin="5"    >
+                                    <Label Content="{Binding Id}" ContentStringFormat="Id: {0}"></Label>
+                                    <Label Content="{Binding total}"  ContentStringFormat="Total: {0}"></Label>
+                                    <Label Content="{Binding Fecha}"  ContentStringFormat="Hora de pedido: {0}"></Label>
+                                    <Grid Background="#49E696" Margin="0,0,0,0" >
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition  Width="0.5*">
-                                                
-                                            </ColumnDefinition>
-                                            <ColumnDefinition  Width="0.25*">
-                                            
-                                            </ColumnDefinition>
+                                            <ColumnDefinition  Width="0.5*"></ColumnDefinition>
+                                            <ColumnDefinition  Width="0.25*"></ColumnDefinition>
                                             <ColumnDefinition  Width="0.25*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
+                                        <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"  Grid.Column="0">Pedido</Label>
+                                        <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"     Grid.Column="1">Precio</Label>
+                                        <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"   Grid.Column="2">Cantidad</Label>
+                                    </Grid>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl  BorderThickness="0"   Margin="0" Padding="0" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding Pedidos}">
 
-                                                    <Border BorderThickness="0,0,0,1"    BorderBrush="Black" Grid.Column="1"  Padding="0" Margin="0" >
-                                                        <Label HorizontalContentAlignment="Left"    Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Precio}"></Label>
-                                                    </Border>
-                                                    <Border BorderThickness="0,0,0,1"  BorderBrush="Black" Grid.Column="0"   >
-                                        <TextBlock TextAlignment="Left" TextWrapping="Wrap"   Grid.Column="0"    Text="{Binding Key}"></TextBlock>
-                                                    </Border>
-                                                    <Border BorderThickness="0,0,0,1"    BorderBrush="Black" Grid.Column="2"  Padding="0" Margin="0" >
-                                                        <Label HorizontalContentAlignment="Left"    Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Cantidad}"></Label>
-                                                    </Border>
-                                                </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid  Margin="0"    >
 
-                        </ItemsControl>
-                            </ScrollViewer>
-                                <Grid Margin="0,10,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Margin="0,0,2.5,0" Grid.Column="0"  Command="{Binding Source={x:Reference lista}, Path=Cancelar}" CommandParameter="{Binding .}">
-                             Cancelar
-                            </Button>
-                                    <Button Margin="2.5,0,0,0" Grid.Column="1" >Entregado</Button>
-                                </Grid>
-                    </StackPanel>
-                    </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3"  />
-                </ItemsPanelTemplate>     
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition  Width="0.5*">
+
+                                                            </ColumnDefinition>
+                                                            <ColumnDefinition  Width="0.25*">
+
+                                                            </ColumnDefinition>
+                                                            <ColumnDefinition  Width="0.25*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Border BorderThickness="0,0,0,1"    BorderBrush="Black" Grid.Column="1"  Padding="0" Margin="0" >
+                                                            <Label HorizontalContentAlignment="Left"    Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Precio}"></Label>
+                                                        </Border>
+                                                        <Border BorderThickness="0,0,0,1"  BorderBrush="Black" Grid.Column="0"   >
+                                                            <TextBlock TextAlignment="Left" TextWrapping="Wrap"   Grid.Column="0"    Text="{Binding Key}"></TextBlock>
+                                                        </Border>
+                                                        <Border BorderThickness="0,0,0,1"    BorderBrush="Black" Grid.Column="2"  Padding="0" Margin="0" >
+                                                            <Label HorizontalContentAlignment="Left"    Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Cantidad}"></Label>
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                    <Grid Margin="0,10,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Margin="0,0,2.5,0" Grid.Column="0"  Command="{Binding Source={x:Reference lista}, Path=Cancelar}" CommandParameter="{Binding .}">
+                                            Cancelar
+                                        </Button>
+                                        <Button  Command="{Binding Source={x:Reference lista}, Path=Entregado}" CommandParameter="{Binding .}" Margin="2.5,0,0,0" Grid.Column="1" >Entregado</Button>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"  />
+                    </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-            <ItemsControl.Template>
-                  <ControlTemplate >
-                <ScrollViewer CanContentScroll="True">
-                        <ItemsPresenter>
-                         
-                        </ItemsPresenter>
-                </ScrollViewer>
-            </ControlTemplate>
-            </ItemsControl.Template>
-        </ItemsControl>
-    </DockPanel>
-    
+                <ItemsControl.Template>
+                    <ControlTemplate >
+                        <ScrollViewer VerticalScrollBarVisibility="Auto"  CanContentScroll="True">
+                            <ItemsPresenter>
+
+                            </ItemsPresenter>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
+        </DockPanel>
+
+    </Grid>
+   
  
 </Window>

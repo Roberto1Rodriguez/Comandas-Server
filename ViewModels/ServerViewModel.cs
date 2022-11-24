@@ -27,16 +27,20 @@ namespace Comandas_Server.ViewModels
         public Producto Prod { get; set; }
 
         public ObservableCollection<Comanda> ListaComandas { get; set; }
-
+        public ObservableCollection<Comanda> ListaEntregados { get; set; }
         public ObservableCollection<Producto> ListaProductos { get; set; }
         public ICommand inicio { get; set; }
         public ICommand Cancelar { get; set; }
+
+        public ICommand Entregado { get; set; }
         public ServerViewModel()
         {   
+            ListaEntregados= new ObservableCollection<Comanda>();
         Server = new ComandasServices();
             Server.ComandaRecibida += Server_ComandaRecibida;
             inicio = new RelayCommand(Iniciar);
             Cancelar = new RelayCommand<Comanda>(CancelarComanda);
+            Entregado= new RelayCommand<Comanda>(EntregarComanda);
             ListaComandas = new ObservableCollection<Comanda>();
             Com = new Comanda();
            
@@ -76,6 +80,12 @@ namespace Comandas_Server.ViewModels
          
             ListaComandas.Add(Com);
            
+        }
+
+        private void EntregarComanda(Comanda obj)
+        {
+            ListaEntregados.Add(obj);
+            ListaComandas.Remove(obj);
         }
 
         private void CancelarComanda(Comanda obj)
