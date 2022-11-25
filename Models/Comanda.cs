@@ -12,10 +12,12 @@ namespace Comandas_Server.Models
 
         public Dictionary<string, Producto> Pedidos { get; set; }
 
-        public decimal total { get; set; }
+        public decimal Total { get; set; }
 
         public string Fecha { get; set; }
 
+        public string Notas { get; set; }
 
+        public string Mesa { get; set; }
     }
 }

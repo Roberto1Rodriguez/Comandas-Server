@@ -75,7 +75,8 @@ namespace Comandas_Server.ViewModels
             Com.Pedidos.Add(Prod.Nombre, Prod);
             Com.Id = 1231;
             Com.Fecha = DateTime.Now.ToShortTimeString();
-            Com.total =100;
+            Com.Total =100;
+            Com.Notas = "La hamburguesa sin tomate, y los tacos sin cebollaLa hamburguesa sin tomate, y los tacos sin cebollaLa hamburguesa sin tomate, y los tacos sin cebollaLa hamburguesa sin tomate, y los tacos sin cebolla";
             Com.Pedidos[Prod.Nombre].Cantidad+=1;
          
             ListaComandas.Add(Com);
