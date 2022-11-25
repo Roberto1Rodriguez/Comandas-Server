@@ -28,19 +28,19 @@ namespace Comandas_Server.ViewModels
 
         public ObservableCollection<Comanda> ListaComandas { get; set; }
         public ObservableCollection<Comanda> ListaEntregados { get; set; }
-        public ObservableCollection<Producto> ListaProductos { get; set; }
-        public ICommand inicio { get; set; }
-        public ICommand Cancelar { get; set; }
+    
+        public ICommand IniciarCommand { get; set; }
+        public ICommand CancelarCommand { get; set; }
 
-        public ICommand Entregado { get; set; }
+        public ICommand EntregadoCommand { get; set; }
         public ServerViewModel()
         {   
             ListaEntregados= new ObservableCollection<Comanda>();
         Server = new ComandasServices();
             Server.ComandaRecibida += Server_ComandaRecibida;
-            inicio = new RelayCommand(Iniciar);
-            Cancelar = new RelayCommand<Comanda>(CancelarComanda);
-            Entregado= new RelayCommand<Comanda>(EntregarComanda);
+            IniciarCommand = new RelayCommand(Iniciar);
+            CancelarCommand = new RelayCommand<Comanda>(CancelarComanda);
+            EntregadoCommand = new RelayCommand<Comanda>(EntregarComanda);
             ListaComandas = new ObservableCollection<Comanda>();
             Com = new Comanda();
            
@@ -74,8 +74,9 @@ namespace Comandas_Server.ViewModels
             Prod.Cantidad = 5;
             Com.Pedidos.Add(Prod.Nombre, Prod);
             Com.Id = 1231;
-            Com.Fecha = DateTime.Now.ToShortTimeString();
+            Com.Hora = DateTime.Now.ToShortTimeString();
             Com.Total =100;
+            Com.Mesa = "Mesa 1";
             Com.Notas = "La hamburguesa sin tomate, y los tacos sin cebollaLa hamburguesa sin tomate, y los tacos sin cebollaLa hamburguesa sin tomate, y los tacos sin cebollaLa hamburguesa sin tomate, y los tacos sin cebolla";
             Com.Pedidos[Prod.Nombre].Cantidad+=1;
          
@@ -87,6 +88,7 @@ namespace Comandas_Server.ViewModels
         {
             ListaEntregados.Add(obj);
             ListaComandas.Remove(obj);
+            
         }
 
         private void CancelarComanda(Comanda obj)

@@ -14,7 +14,7 @@ namespace Comandas_Server.Models
 
         public decimal Total { get; set; }
 
-        public string Fecha { get; set; }
+        public string Hora{ get; set; }
 
         public string Notas { get; set; }
 

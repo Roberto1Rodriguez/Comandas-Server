@@ -32,6 +32,11 @@ namespace Comandas_Server.Services
             hilo.IsBackground = true;
             hilo.Start();
         }
+
+        private void Detener()
+        {
+           listener.Stop();
+        }
         public event Action<Comanda>? ComandaRecibida;
         private void Escuchar()
         {

@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <None Remove="Assets\flores.png" />
+    <None Remove="Assets\fondo2.jpg" />
+    <None Remove="Assets\fondo3.jpg" />
     <None Remove="Assets\sushi.png" />
+    <None Remove="Assets\sushicon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +25,16 @@
     <Resource Include="Assets\flores.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\fondo2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\fondo3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\sushi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\sushicon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

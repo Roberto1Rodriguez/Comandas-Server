@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ServerComandas" 
         xmlns:viewmodels1="clr-namespace:Comandas_Server.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1000">
+        Title="Server Comandas" Icon="/Assets/sushicon.png" Height="520" Width="1000">
 
     <Window.DataContext>
         <viewmodels1:ServerViewModel x:Name="lista"></viewmodels1:ServerViewModel>
@@ -20,17 +20,21 @@
             <TextBlock Padding="5" FontSize="15"   Background="#FF6324" TextAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" DockPanel.Dock="Top">Entregados</TextBlock>
             <ScrollViewer VerticalScrollBarVisibility="Auto"   >
                 <ItemsControl ItemsSource="{Binding ListaEntregados}">
+                    <ItemsControl.Background>
+                        <ImageBrush ImageSource="/Assets/fondo3.jpg" Stretch="UniformToFill"></ImageBrush>
+                    </ItemsControl.Background>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Padding="5" Background="#253333" CornerRadius="5" Margin="5">
                             <WrapPanel >
-                                <TextBlock Foreground="White">Id:</TextBlock>
-                                    <TextBlock Margin="0,0,2,0" Foreground="White" Text="{Binding Id}"></TextBlock>
-                                <TextBlock   Foreground="White">Hora:</TextBlock>
-                                    <TextBlock Margin="0,0,2,0" Foreground="White" Text="{Binding Fecha}"></TextBlock>
-                                    <TextBlock   Foreground="White">Total:</TextBlock>
-                                <TextBlock  Foreground="White" Text="{Binding Total}"></TextBlock>
-                            </WrapPanel>
+                               
+                                    <Label Margin="0,0,4,0" Foreground="White"  ContentStringFormat="Id: {0}."   Content="{Binding Id}"></Label>
+                              
+                                    <Label Margin="0,0,4,0" Foreground="White" ContentStringFormat="Hora de pedido: {0}"  Content="{Binding Hora}"></Label>
+                                    <Label Margin="0,0,4,0" Foreground="White" ContentStringFormat="Total: {0}$."  Content="{Binding Total}"></Label>
+                                    <Label Margin="0,0,4,0" Foreground="White" ContentStringFormat="Mesa: {0}."  Content="{Binding Mesa}"></Label>
+                                    
+                                </WrapPanel>
                             </Border>
 
                         </DataTemplate>
@@ -39,6 +43,9 @@
             </ScrollViewer>
         </DockPanel>
         <DockPanel Grid.Column="0" Background="#FFEFD8" >
+            <!--<DockPanel.Background>
+                <ImageBrush ImageSource="/Assets/fondo2.jpg" Stretch="UniformToFill"></ImageBrush>
+            </DockPanel.Background>-->
             <Border Padding="0" Margin="0" DockPanel.Dock="Top" >
                 <Border.Background>
                     <ImageBrush ImageSource="/Assets/flores.png" Stretch="UniformToFill"></ImageBrush>
@@ -49,9 +56,11 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </Border>
+            <Label HorizontalAlignment="Center" Padding="0" Margin="0" Content="{Binding ListaComandas.Count}"  ContentStringFormat="Actualmente hay {0} comanda(s) pendientes." DockPanel.Dock="Top" ></Label>
             <Border Background="WhiteSmoke" DockPanel.Dock="Bottom" >
+              
         
-                <Button  Width="100" Content="Iniciar" Padding="5" Command="{Binding inicio}" Margin="2" HorizontalAlignment="Center" Background="#253333" Foreground="White"  >
+                <Button  Width="100" Content="Iniciar" Padding="5" Command="{Binding IniciarCommand}" Margin="2" HorizontalAlignment="Center" Background="#253333" Foreground="White"  >
 
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -63,6 +72,7 @@
             </Border>
               
             <ItemsControl VerticalAlignment="Top"  HorizontalAlignment="Center" ItemsSource="{Binding ListaComandas}">
+                
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border HorizontalAlignment="Left"  Height="380" Width="240"   BorderThickness="1" BorderBrush="#9E642A" Padding="0" Margin="5"  CornerRadius="15">
@@ -76,10 +86,10 @@
                             <Grid   >
 
                                 <StackPanel  Margin="5"    >
-                                    <Label Content="{Binding Id}" ContentStringFormat="Id: {0}"></Label>
-                                    <Label Content="{Binding Total}"  ContentStringFormat="Total: {0}"></Label>
-                                    <Label Content="{Binding Fecha}"  ContentStringFormat="Hora de pedido: {0}"></Label>
-                                    <Label Content="{Binding Mesa}"  ContentStringFormat="Mesa: {0}"></Label>
+                                    <Label  Content="{Binding Id}" ContentStringFormat="Id: {0}."></Label>
+                                    <Label Content="{Binding Total}"  ContentStringFormat="Total: {0}$."></Label>
+                                    <Label Content="{Binding Hora}"  ContentStringFormat="Hora de pedido: {0}"></Label>
+                                    <Label Content="{Binding Mesa}"  ContentStringFormat="Mesa: {0}."></Label>
                                     <Grid Background="#49E696" Margin="0,0,0,0" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition  Width="0.5*"></ColumnDefinition>
@@ -87,7 +97,7 @@
                                             <ColumnDefinition  Width="0.25*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"  Grid.Column="0">Pedido</Label>
-                                        <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"     Grid.Column="1">Precio</Label>
+                                        <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"     Grid.Column="1">Precio c/u</Label>
                                         <Label HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Padding="0" Margin="0"   BorderBrush="Black"   Grid.Column="2">Cantidad</Label>
                                     </Grid>
                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -108,7 +118,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Border BorderThickness="0,0,0,1"    BorderBrush="Black" Grid.Column="1"  Padding="0" Margin="0" >
-                                                            <Label HorizontalContentAlignment="Left"    Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Precio}"></Label>
+                                                            <Label HorizontalContentAlignment="Left"    Grid.Column="1" Padding="0" Margin="0"    Content="{Binding Value.Precio}" ContentStringFormat=" {0}$"></Label>
                                                         </Border>
                                                         <Border BorderThickness="0,0,0,1"  BorderBrush="Black" Grid.Column="0"   >
                                                             <TextBlock TextAlignment="Left" TextWrapping="Wrap"   Grid.Column="0"    Text="{Binding Key}"></TextBlock>
@@ -134,10 +144,12 @@
                                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
                                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <Button Margin="0,0,2.5,0" Grid.Column="0"  Command="{Binding Source={x:Reference lista}, Path=Cancelar}" CommandParameter="{Binding .}">
-                                            Cancelar
+                                        <Button Content="Cancelar" BorderThickness="4,0,0,0"  Background="#FF3C26" Foreground="White"  Margin="0,0,2.5,0" Grid.Column="0"  Command="{Binding Source={x:Reference lista}, Path=CancelarCommand}" CommandParameter="{Binding .}">
+
                                         </Button>
-                                        <Button  Command="{Binding Source={x:Reference lista}, Path=Entregado}" CommandParameter="{Binding .}" Margin="2.5,0,0,0" Grid.Column="1" >Entregado</Button>
+                                        <Button BorderThickness="4,0,0,0"  Background="#253333" Foreground="White"  Command="{Binding Source={x:Reference lista}, Path=EntregadoCommand}" CommandParameter="{Binding .}" Margin="2.5,0,0,0" Grid.Column="1" Content="Entregado" >
+                                        
+                                        </Button>
                                     </Grid>
                                     
                                 </StackPanel>
